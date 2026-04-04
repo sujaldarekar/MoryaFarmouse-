@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: moryafarmhouse
+    env: static
+    buildCommand: ""
+    staticPublishPath: .
