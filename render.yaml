@@ -1,6 +1,10 @@
 services:
   - type: web
     name: moryafarmhouse
-    env: static
+    runtime: static
     buildCommand: ""
     staticPublishPath: .
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
