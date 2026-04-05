@@ -403,10 +403,20 @@ ul {
 /* =========================================
    PRICING SECTION
    ========================================= */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
 .pricing-card {
     background: var(--white);
     max-width: 400px;
     margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-soft);
@@ -423,11 +433,32 @@ ul {
     background: var(--primary-color);
     color: var(--white);
     padding: 30px;
+    min-height: 180px;
 }
 
 .price-header h3 {
     margin-bottom: 10px;
     font-weight: 500;
+}
+
+.contact-cta {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.package-phone {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.package-phone:hover {
+    opacity: 0.85;
 }
 
 .price {
@@ -444,6 +475,7 @@ ul {
 .price-features {
     padding: 30px;
     text-align: left;
+    flex: 1;
 }
 
 .price-features li {
@@ -459,6 +491,7 @@ ul {
 }
 
 .pricing-card .btn {
+    margin-top: auto;
     margin-bottom: 30px;
 }
 
