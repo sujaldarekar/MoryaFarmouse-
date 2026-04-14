@@ -192,13 +192,17 @@ ul {
     color: var(--white);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .nav-logo-img {
-    height: 40px;
-    width: auto;
-    object-fit: contain;
+    width: 46px;
+    height: 46px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    flex-shrink: 0;
 }
 
 .nav-links {
@@ -484,6 +488,7 @@ ul {
     padding: 30px;
     text-align: left;
     flex: 1;
+    margin-bottom: 6px;
 }
 
 .price-features li {
@@ -496,11 +501,6 @@ ul {
 
 .price-features i {
     color: var(--primary-color);
-}
-
-.pricing-card .btn {
-    margin-top: auto;
-    margin-bottom: 30px;
 }
 
 /* =========================================
