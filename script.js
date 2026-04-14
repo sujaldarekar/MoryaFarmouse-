@@ -214,4 +214,58 @@ document.addEventListener('DOMContentLoaded', () => {
             // document.getElementById('quick-options').style.display = 'none';
         });
     });
+
+    /* ==========================================
+       5. REELS VOLUME BUTTON UI
+       ========================================== */
+    const reelVolumeButtons = document.querySelectorAll('.reel-volume-btn');
+
+    function updateVolumeButton(button, muted) {
+        button.setAttribute('data-muted', muted ? 'true' : 'false');
+        button.setAttribute('aria-label', muted ? 'Turn sound on' : 'Turn sound off');
+        button.innerHTML = muted
+            ? '<i class="fas fa-volume-mute"></i>'
+            : '<i class="fas fa-volume-up"></i>';
+    }
+
+    reelVolumeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (button.disabled) {
+                return;
+            }
+
+            const reelCard = button.closest('.reel-card');
+            const reelFrame = reelCard ? reelCard.querySelector('.reel-embed') : null;
+            const reelVideo = reelCard ? reelCard.querySelector('.reel-video') : null;
+            const isMuted = button.getAttribute('data-muted') !== 'false';
+            const nextMuted = !isMuted;
+
+            updateVolumeButton(button, nextMuted);
+
+            if (reelVideo) {
+                reelVideo.muted = nextMuted;
+
+                if (!nextMuted) {
+                    reelVideo.play().catch(() => {
+                        updateVolumeButton(button, true);
+                        reelVideo.muted = true;
+                    });
+                }
+
+                return;
+            }
+
+            // Instagram iframe is cross-origin, so we reapply src with a muted toggle hint.
+            if (reelFrame) {
+                try {
+                    const embedUrl = new URL(reelFrame.src);
+                    embedUrl.searchParams.set('autoplay', '1');
+                    embedUrl.searchParams.set('muted', nextMuted ? '1' : '0');
+                    reelFrame.src = embedUrl.toString();
+                } catch (error) {
+                    // Ignore malformed URL issues for graceful fallback.
+                }
+            }
+        });
+    });
 });
